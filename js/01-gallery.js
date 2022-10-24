@@ -36,15 +36,21 @@ gallery.addEventListener('click', event => {
 
   const selectedImage = event.target.getAttribute('data-source');
 
-  const instance = basicLightbox.create(`
-    <div class='modal'>
-    <img src="${selectedImage}" width=800px, height=600px>
-    </div);
-`);
+  const instance = basicLightbox.create(
+    `
+  <div class='modal'>
+  <img src="${selectedImage}" width=800px, height=600px>
+  </div>`,
+    {
+      onClose: instance => {
+        document.removeEventListener('keydown', event);
+      },
+    }
+  );
 
   instance.show();
 
-  gallery.addEventListener('keydown', event => {
+  document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
       instance.close();
     }
