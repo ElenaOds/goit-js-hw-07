@@ -43,16 +43,16 @@ gallery.addEventListener('click', event => {
   </div>`,
     {
       onClose: instance => {
-        document.removeEventListener('keydown', event);
+        document.removeEventListener('keydown', onCloseModal);
       },
     }
   );
-
   instance.show();
 
-  document.addEventListener('keydown', event => {
+  function onCloseModal(event) {
     if (event.key === 'Escape') {
       instance.close();
     }
-  });
+  }
+  document.addEventListener('keydown', onCloseModal);
 });
